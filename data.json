@@ -1,17 +1,5 @@
 {
     "users": [
-        129207598,
-        690523461,
-        1151493375
-    ],
-    "http://1": "BQACAgIAAxkBAAPmZA67lGn4SRU-dO7ptdZ9UJU1LDUAAnQjAALwC2BLQ6SFhbPwm7IvBA",
-    "http://example.com": "BQACAgIAAxkBAAP6ZA7YtN0R-EyIZsC570B10kJ--gwAAgIoAAKLWHBICOmXD0lrsY4vBA",
-    "https://elements.envato.com/ru/urban-opener-2R5PHEJ": "BQACAgIAAxkBAAIBLmQQLoSnePVXbo94NonKmtW8TTlCAAJZJwACi1iASKRNaP2121DnLwQ",
-    "http:///adad": "BQACAgIAAxkBAAIBRGQRij4euzbrfEjKDPMw1prCLexvAAJ1MwACCuyJSAca8zb87TyOLwQ",
-    "http://as": "BQACAgIAAxkBAAIBVGQRitrLyA4jZ26Vt_TB3p_F10V8AAJ5MwACCuyJSCFYg1iaFAV_LwQ",
-    "http://salom": "BQACAgIAAxkBAAIBX2QRi9wcz4NLKWM3VZmUm3aIMPxGAAJ9MwACCuyJSOv_tqIhhKTrLwQ",
-    "http://br": "BQACAgIAAxkBAAIBbmQRjHRFXTMcadeeq2N7cUMUWJpvAAKAMwACCuyJSL6XyFTJC3lHLwQ",
-    "http://null": "BQACAgIAAxkBAAIBi2QRjsutrfHqEuYStm1KtV7PdgnRAAKHMwACCuyJSCRTVWBHnTwvLwQ",
-    "http://ok": "BQACAgIAAxkBAAIBjWQRkVzelqKk1wnapGIjr4WYe3z_AALxJwACGrmQSGD8_4VTHib1LwQ",
-    "https://elements.envato.com/ru/leafs-social-media-subscribers-for-after-effects-R259J4L": "CgACAgIAAxkBAAIBq2QRlCg0kI5MnPothRYSuVV4kyr1AAIwKgACnU2QSBhAoLioBjJWLwQ"
+       
+    ]
 }

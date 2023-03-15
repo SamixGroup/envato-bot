@@ -4,7 +4,7 @@ import fs from 'fs'
 import { MyContext, FileInfo, ContextData } from './types'
 import { saveUser, onlyAdmin } from './middleware'
 import { saveFile } from './handlers'
-const inlineKeyboard = new InlineKeyboard()
+
 
 const admin = process.env.ADMIN as unknown as number
 
@@ -38,6 +38,7 @@ bot.command('download', async (ctx: MyContext) => {
 bot.hears(/http|https/, async (ctx: MyContext) => {
     if (ctx.session.state !== 'link') return
     const from = ctx.from
+    let inlineKeyboard = new InlineKeyboard()
     fs.readFile('./data.json', (err, data) => {
         if (err) return ctx.reply(`Something went wrong ${err}`)
         const fileData = JSON.parse(data.toString()) as FileInfo

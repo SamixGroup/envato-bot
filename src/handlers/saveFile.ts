@@ -1,6 +1,6 @@
 import { FileInfo, MyContext } from "../types";
 import fs from 'fs'
-const backupChannel = process.env.ADMIN as unknown as number
+const backupChannel = process.env.CHANNEL as unknown as number
 
 
 

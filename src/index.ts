@@ -14,7 +14,6 @@ function initial() {
 }
 
 
-console.log(process.env.TOKEN)
 const bot = new Bot<MyContext>(process.env.TOKEN as string);
 
 bot.use(session({ initial }))
@@ -72,6 +71,17 @@ bot.callbackQuery(/send_(.+)/, onlyAdmin, async (ctx) => {
     ctx.reply("Faylni yuboring. Opisaniyada linkni yozishni unutmang!")
     ctx.answerCallbackQuery("")
 })
+bot.command('donate', async (ctx) => {
+    let donateButton = new InlineKeyboard()
+
+    donateButton.url("Click Up orqali o'tkazish", process.env.CLICK_DONATE as string)
+    donateButton.row()
+    donateButton.url("PayMe orqali o'tkazish", process.env.PAYME_DONATE as string)
+    ctx.reply("Agar bot sizga yoqqan bo'lsa bechora adminni pechenki va coffeesiga donat qiling. Siz ssilka tashaganizda erinmasdan tortib berishi 🥲 va albatta botni davomiy ishlashi uchun 🫶",
+        {
+            reply_markup: donateButton
+        })
+})
 
 bot.on(':text', async (ctx) => {
     let inlineKeyboard = new InlineKeyboard()
@@ -79,6 +89,10 @@ bot.on(':text', async (ctx) => {
         reply_markup: inlineKeyboard.text('⬇️ Yuklash ⬇️', `download`)
     }).catch(() => { })
 })
+
+
+
+
 bot.catch(err => {
     console.log(err.message);
 })

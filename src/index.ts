@@ -46,7 +46,6 @@ bot.hears(/http|https/, async (ctx: MyContext) => {
         reply_markup: inlineKeyboard.text('⬇️ Yuklash ⬇️', `download`)
     }).catch(() => { })
     const from = ctx.from
-    let inlineKeyboard = new InlineKeyboard()
     fs.readFile('./data.json', (err, data) => {
         if (err) return ctx.reply(`Something went wrong ${err}`)
         const fileData = JSON.parse(data.toString()) as FileInfo

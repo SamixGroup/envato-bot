@@ -6,12 +6,12 @@ const backupChannel = process.env.CHANNEL as unknown as number
 
 export default async (ctx: MyContext) => {
     let fileId = ''
-    if (ctx.message && ctx.message.document)
-        fileId = ctx.message.document.file_id;
-    else return ctx.reply("You must send file!")
+    if (ctx.message && ctx.message.video)
+        fileId = ctx.message.video.file_id;
+    else return ctx.reply("You must send video!")
     const link = ctx.message?.caption ?? ''
     if (ctx.session.state?.match(/\d+/))
-        ctx.api.sendDocument(`${ctx.session.state}`, fileId, { caption: "Sizning buyurtmangiz: " + link })
+        ctx.api.sendVideo(`${ctx.session.state}`, fileId, { caption: "Sizning buyurtmangiz: " + link })
 
     fs.readFile('./data.json', (err, data: any) => {
         const parsedData = JSON.parse(data.toString()) as FileInfo

@@ -1,10 +1,9 @@
-
 import { Bot, InlineKeyboard, session } from 'grammy'
 import fs from 'fs'
 import { MyContext, FileInfo, ContextData } from './types'
 import { saveUser, onlyAdmin } from './middleware'
-import { saveFile } from './handlers'
-const inlineKeyboard = new InlineKeyboard()
+import { saveFile, saveVideo } from './handlers'
+
 
 const admin = process.env.ADMIN as unknown as number
 
@@ -15,28 +14,38 @@ function initial() {
 }
 
 
-
+console.log(process.env.TOKEN)
 const bot = new Bot<MyContext>(process.env.TOKEN as string);
 
 bot.use(session({ initial }))
 bot.use(saveUser)
 
 
-bot.on(':document', saveFile);
+bot.on(':document', onlyAdmin, saveFile);
+bot.on(':video', onlyAdmin, saveVideo);
 
 // Запуск бота
 bot.command('start', async (ctx) => {
     ctx.session.state = ''
-    ctx.reply("Assalomu alaykum. Bu bot envatodan premium materiallarni yarim avtomat rejimda yuklab olish uchun chiqarilgan. Yuklashga ariza yuborish uchun /download komandasini yuboring")
+    let inlineKeyboard = new InlineKeyboard()
+
+    ctx.reply("Assalomu alaykum. Bu bot Envato va Freepik saytlaridan premium materiallarni yarim avtomat rejimda yuklab olish uchun chiqarilgan. Yuklashga ariza yuborish uchun ⬇️ Yuklash ⬇️ tugmasini bosing",
+        {
+            reply_markup: inlineKeyboard.text('⬇️ Yuklash ⬇️', `download`)
+        })
 })
 
-bot.command('download', async (ctx: MyContext) => {
+bot.callbackQuery('download', async (ctx: MyContext) => {
     ctx.reply("Yuklab olmoqchi bo'lgan materialingiz linkini yuboring: ")
     ctx.session.state = "link"
 })
 
 bot.hears(/http|https/, async (ctx: MyContext) => {
-    if (ctx.session.state !== 'link') return
+    let inlineKeyboard = new InlineKeyboard()
+
+    if (ctx.session.state !== 'link') return ctx.reply("Agar fayl yuklamoqchi bo'lsangiz Yuklash tugmasini bosing", {
+        reply_markup: inlineKeyboard.text('⬇️ Yuklash ⬇️', `download`)
+    }).catch(() => { })
     const from = ctx.from
     fs.readFile('./data.json', (err, data) => {
         if (err) return ctx.reply(`Something went wrong ${err}`)
@@ -46,7 +55,7 @@ bot.hears(/http|https/, async (ctx: MyContext) => {
             ctx.reply("Siz yuborgan link bo'yicha yuklangan material topilmadi. Biz uni ruchnoy yuklashimiz bilan uni sizga yuboramiz. Iltimos kuting")
             ctx.api.sendMessage(
                 admin,
-                `Yangi zayavka\nLink: ${ctx.message?.text}\nFoydalanuvchi: ${from?.first_name}\nID: ${from?.id}` + (`\nUsername: @${from?.username}` ?? ''),
+                `❗️Yangi zakaz\nLink: ${ctx.message?.text}\nFoydalanuvchi: ${from?.first_name}\nID: ${from?.id}` + (`\nUsername: @${from?.username}` ?? ''),
                 {
                     reply_markup: inlineKeyboard.text('Yuborish', `send_${from?.id}`)
                 }
@@ -64,5 +73,13 @@ bot.callbackQuery(/send_(.+)/, onlyAdmin, async (ctx) => {
     ctx.answerCallbackQuery("")
 })
 
-
+bot.on(':text', async (ctx) => {
+    let inlineKeyboard = new InlineKeyboard()
+    ctx.reply("Agar fayl yuklamoqchi bo'lsangiz Yuklash tugmasini bosing", {
+        reply_markup: inlineKeyboard.text('⬇️ Yuklash ⬇️', `download`)
+    }).catch(() => { })
+})
+bot.catch(err => {
+    console.log(err.message);
+})
 export default bot

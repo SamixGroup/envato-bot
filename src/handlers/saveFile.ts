@@ -11,7 +11,9 @@ export default async (ctx: MyContext) => {
     else return ctx.reply("You must send file!")
     const link = ctx.message?.caption ?? ''
     if (ctx.session.state?.match(/\d+/))
-        ctx.api.sendDocument(`${ctx.session.state}`, fileId, { caption: "Sizning buyurtmangiz: " + link })
+        ctx.api.sendDocument(`${ctx.session.state}`, fileId, { caption: `Sizning buyurtmangiz: ${link} \nBuyurtmangiz 🫴
+
+        Bot sizga yoqqan bo'lsa, uni davomiy ishlashi uchun o'z hissangizni /donate orqali qo'shishiz mumkin 🥹` })
 
     fs.readFile('./data.json', (err, data: any) => {
         const parsedData = JSON.parse(data.toString()) as FileInfo

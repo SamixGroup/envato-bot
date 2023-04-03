@@ -12,9 +12,8 @@ export default async (ctx: MyContext) => {
     const link = ctx.message?.caption ?? ''
     if (ctx.session.state?.match(/\d+/))
         ctx.api.sendVideo(`${ctx.session.state}`, fileId, {
-            caption: `Sizning buyurtmangiz: ${link} \nBuyurtmangiz 🫴
-
-        Bot sizga yoqqan bo'lsa, uni davomiy ishlashi uchun o'z hissangizni /donate orqali qo'shishiz mumkin 🥹`})
+            caption: `Sizning buyurtmangiz: ${link} \nBot sizga yoqqan bo'lsa, uni davomiy ishlashi uchun o'z hissangizni /donate orqali qo'shishiz mumkin 🥹`
+        })
 
     fs.readFile('./data.json', (err, data: any) => {
         const parsedData = JSON.parse(data.toString()) as FileInfo

@@ -39,7 +39,7 @@ bot.callbackQuery('download', async (ctx: MyContext) => {
     ctx.session.state = "link"
 })
 
-bot.hears(/http|https/, async (ctx: MyContext) => {
+bot.hears(/http:\/\/freepik.com|https:\/\/freepik.com|https:\/\/elements.envato.com|http:\/\/elements.envato.com/, async (ctx: MyContext) => {
     let inlineKeyboard = new InlineKeyboard()
 
     if (ctx.session.state !== 'link') return ctx.reply("Agar fayl yuklamoqchi bo'lsangiz Yuklash tugmasini bosing", {

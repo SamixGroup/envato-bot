@@ -49,7 +49,9 @@ bot.hears(/http:\/\/freepik.com|https:\/\/freepik.com|https:\/\/elements.envato.
     fs.readFile('./data.json', (err, data) => {
         if (err) return ctx.reply(`Something went wrong ${err}`)
         const fileData = JSON.parse(data.toString()) as FileInfo
-        if (fileData[ctx.message?.text + '']) ctx.replyWithDocument(fileData[ctx.message?.text + ''])
+        if (fileData[ctx.message?.text + '']) ctx.replyWithDocument(fileData[ctx.message?.text + ''], {
+            caption: `Buyurtmangiz 🫴\n\nBot yoqdimi? Unda uni kuchaytirishimizga o'z hissangizni qo'shing, /donate qiling🥹`
+        }).catch(er => { })
         else {
             ctx.reply("Siz yuborgan link bo'yicha yuklangan material topilmadi. Biz uni ruchnoy yuklashimiz bilan uni sizga yuboramiz. Iltimos kuting")
             ctx.api.sendMessage(
